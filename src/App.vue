@@ -21,9 +21,8 @@
     height: 100%;
     width: 100%;
   }
-
   .container {
-    padding-top: 1.88rem;
     padding-bottom: 0.88rem;
+    overflow: auto;
   }
 </style>

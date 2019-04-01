@@ -8,6 +8,7 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
     import Head from '../../common/head'
     import Foot from '../../common/tabbar'
     import Recommand from '../../components/recommand'
@@ -15,8 +16,12 @@
     import Repair from '../../components/repair'
     import Headlines from '../../components/headlines'
 
+
     export default {
         created() {
+            this.getSubstantial();
+            this.getPageList();
+
             this.Observer.$on("handleTo", (data) => {
                 switch (data) {
                     case 1: {
@@ -37,6 +42,7 @@
                     }
                 }
             })
+
         },
         data() {
             return {
@@ -51,12 +57,21 @@
             Repair,
             Headlines
         },
+        methods: {
+            ...mapActions({
+                getSubstantial: "recommand/getSubstantial",
+                getPageList:"recommand/getPageList",
 
+            })
+        }
 
     }
 </script>
 <style>
     .home {
         margin-top: 1.88rem;
+        height: 100%;
+        width: 100%;
+
     }
 </style>

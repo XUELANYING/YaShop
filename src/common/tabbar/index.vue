@@ -1,6 +1,6 @@
 <template>
     <div id="footer">
-        <router-link v-for="(item,index) in tabbar" :to="item.path" tag="div">
+        <router-link v-for="(item,index) in tabbar" :to="item.path" tag="div" :key="index">
             <!--<i></i>--><img :src="item.img" alt="">
             <span>{{item.title}}</span>
         </router-link>

@@ -6,6 +6,8 @@ import Message from './message'
 import Mine from './mine'
 import Shopcar from './shopcar'
 import Search from './search'
+import Userlogin from './uselogin'
+import Register from './register'
 
 Vue.use(Router);
 
@@ -21,6 +23,8 @@ export default new Router({
         Mine,
         Shopcar,
         Search,
+        Register,
+        Userlogin,
         {
             path: "**",
             redirect: "/home"

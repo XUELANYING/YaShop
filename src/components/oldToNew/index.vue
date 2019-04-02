@@ -19,27 +19,15 @@
 
         <!--process-->
         <div class="process">
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/770/2b5b9ef511fe5d.png.webp" alt="">
-            </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/768/2b5ba5fb380964.png.webp" alt="">
+            <div v-for="item in process">
+                <img :src="item.imagePath" alt="">
             </div>
         </div>
 
         <!--recycle-pic-->
         <div class="recycle-pic">
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/914/79111643749da7.png.webp" alt="">
-            </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/914/79111643749da7.png.webp" alt="">
-            </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/914/79111643749da7.png.webp" alt="">
-            </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/914/79111643749da7.png.webp" alt="">
+            <div v-for="item in recycle">
+                <img :src="item.imagePath" alt="">
             </div>
         </div>
 
@@ -49,24 +37,10 @@
                 <img src="https://img2.yaya.cn/newstatic/767/2b5bd950e7a2c9.png.webp" alt="">
             </div>
             <div class="brands">
-                <div class="brands-img">
-                    <img src="https://img2.yaya.cn/newstatic/771/2b5be59c430022.png.webp" alt="">
+                <div class="brands-img" v-for="item in hotBrands">
+                    <img :src="item.imagePath" alt="">
                 </div>
-                <div class="brands-img">
-                    <img src="https://img2.yaya.cn/newstatic/771/2b5be59c430022.png.webp" alt="">
-                </div>
-                <div class="brands-img">
-                    <img src="https://img2.yaya.cn/newstatic/771/2b5be59c430022.png.webp" alt="">
-                </div>
-                <div class="brands-img">
-                    <img src="https://img2.yaya.cn/newstatic/771/2b5be59c430022.png.webp" alt="">
-                </div>
-                <div class="brands-img">
-                    <img src="https://img2.yaya.cn/newstatic/771/2b5be59c430022.png.webp" alt="">
-                </div>
-                <div class="brands-img">
-                    <img src="https://img2.yaya.cn/newstatic/771/2b5be59c430022.png.webp" alt="">
-                </div>
+
             </div>
         </div>
 
@@ -78,50 +52,18 @@
             </div>
 
             <div class="floor-goods-box">
-                <div class="item-goods">
+                <div class="item-goods" v-for="(item,index) in hotmoblie">
                     <div class="goods-img">
-                        <img src="https://img2.yaya.cn/pic/product/440x440/20181207094157912.jpg" alt="">
+                        <img :src="item.imagePath" alt="">
                     </div>
 
                     <div class="goods-title">
-                        <p class="goods-name">iPhone XS Max 全网通版</p>
-                        <p class="good-tag">最高回收价</p>
-                        <p class="goods-price">￥7750.00</p>
+                        <p class="goods-name">{{item.title}}</p>
+                        <p class="good-tag">{{item.hint}}</p>
+                        <p class="goods-price">{{item.price}}</p>
                     </div>
                 </div>
-                <div class="item-goods">
-                    <div class="goods-img">
-                        <img src="https://img2.yaya.cn/pic/product/440x440/20181207094157912.jpg" alt="">
-                    </div>
 
-                    <div class="goods-title">
-                        <p class="goods-name">iPhone XS Max 全网通版</p>
-                        <p class="good-tag">最高回收价</p>
-                        <p class="goods-price">￥7750.00</p>
-                    </div>
-                </div>
-                <div class="item-goods">
-                    <div class="goods-img">
-                        <img src="https://img2.yaya.cn/pic/product/440x440/20181207094157912.jpg" alt="">
-                    </div>
-
-                    <div class="goods-title">
-                        <p class="goods-name">iPhone XS Max 全网通版</p>
-                        <p class="good-tag">最高回收价</p>
-                        <p class="goods-price">￥7750.00</p>
-                    </div>
-                </div>
-                <div class="item-goods">
-                    <div class="goods-img">
-                        <img src="https://img2.yaya.cn/pic/product/440x440/20181207094157912.jpg" alt="">
-                    </div>
-
-                    <div class="goods-title">
-                        <p class="goods-name">iPhone XS Max 全网通版</p>
-                        <p class="good-tag">最高回收价</p>
-                        <p class="goods-price">￥7750.00</p>
-                    </div>
-                </div>
                 <div class="resouce-more">
                     <img src="https://img2.yaya.cn/newstatic/767/39629e8245cee8.png.webp" alt="">
                 </div>
@@ -135,11 +77,8 @@
                 <img src="https://img2.yaya.cn/newstatic/768/2b5c1bc2b2d9ff.png.webp" alt="">
             </div>
             <div class="recycle-server-img">
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/771/2b5c248e56076a.png.webp" alt="">
-                </div>
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/766/2b5c274dd64f8e.png.webp" alt="">
+                <div v-for="item in server">
+                    <img :src="item.imagePath" alt="">
                 </div>
             </div>
 
@@ -151,15 +90,10 @@
                 <img src="https://img2.yaya.cn/newstatic/765/2b5c32e1f51851.png.webp" alt="">
             </div>
             <div class="access-img">
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/914/70fa575891c081.png.webp" alt="">
+                <div v-for="item in access">
+                    <img :src="item.imagePath" alt="">
                 </div>
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/914/70fa575891c081.png.webp" alt="">
-                </div>
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/768/2b5c3f47d2a47b.png.webp" alt="">
-                </div>
+
             </div>
         </div>
 
@@ -182,7 +116,13 @@
         computed:{
             ...mapState({
                 getHappyShare:state=>state.oldtonew.getHappyShare,
-                icon:state=>state.oldtonew.icon
+                process:state=>state.oldtonew.process,
+                icon:state=>state.oldtonew.icon,
+                recycle:state=>state.oldtonew.recycle,
+                hotBrands:state=>state.oldtonew.hotBrands,
+                hotmoblie:state=>state.oldtonew.hotmoblie,
+                server:state=>state.oldtonew.server,
+                access:state=>state.oldtonew.access
             })
         },
         methods:{

@@ -1,5 +1,9 @@
 export default {
     path: "/classify",
     component: () => import("@/views/classify"),
-    name: "classify"
+    name: "classify",
+    meta:{
+        tabFlag:false,
+        title:"分类"
+    }
 }

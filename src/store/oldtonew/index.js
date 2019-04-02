@@ -2,13 +2,41 @@ import {getHotBrands} from "../../api/api.js"
 export default {
     state:{
         hotBrandsList:[],
-        icon:[]
+        process:[],
+        icon:[],
+        recycle:[],
+        hotBrands:[],
+        hotmoblie:[],
+        server:[],
+        access:[]
     },
     mutations: {
         getMutationHotBrands(state, params) {
+
             state.hotBrandsList = params;
-            state.icon = params[1].content
-            console.log(state.icon)
+            state.icon = params[1].content;
+            state.process = params[2].content;
+
+            for (var i = 3 ; i < 5 ; i++ ){
+                for (var j = 0 ; j < params[i].content.length;j++){
+                    state.recycle.push(params[i].content[j]);
+                }
+            }
+
+            for (var i = 6 ; i < 8 ; i++ ){
+                for (var j = 0 ; j < params[i].content.length;j++){
+                    state.hotBrands.push(params[i].content[j]);
+                }
+            }
+            state.hotmoblie = params[9].content;
+            state.server = params[12].content;
+            for (var i = 14 ; i < 17 ; i++ ){
+                for (var j = 0 ; j < params[i].content.length;j++){
+                    state.access.push(params[i].content[j]);
+                }
+            }
+
+            console.log(state.access)
         },
 
     },

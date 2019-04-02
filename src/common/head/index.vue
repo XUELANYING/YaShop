@@ -2,9 +2,9 @@
     <div id="top">
         <div class="top-wrap">
             <div class="wrap">
-                <a href="#">朝阳区
+                <router-link to="/stores">朝阳区
                     <i class="fa fa-angle-down font-16 ml-5"></i>
-                </a>
+                </router-link>
                 <div class="line"></div>
                 <router-link class="search-box" tag="div" to="/search">
                     <i class="fa fa-search mr-5 white"></i>
@@ -68,6 +68,7 @@
     .wrap {
         display: flex;
         height: 0.68rem;
+        width:6.88rem;
         margin: 0.28rem 0;
         background: rgba(0, 0, 0, .4);
         border-radius: 0.6rem;

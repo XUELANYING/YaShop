@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <Foot/>
+    <Foot v-if="this.$route.meta.tabFlag"/>
   </div>
 </template>
 <script>
@@ -10,6 +10,9 @@
     import Search from './views/search'
 
     export default {
+        created(){
+
+        },
         components: {
             Foot,
             Search

@@ -18,7 +18,7 @@
             <!--分类左边-->
             <div class="sticky">
                 <ul>
-                    <li v-for="(item,index) in category" @click="handleCategory(index)"><a href="#">{{item.title}}</a></li>
+                    <li v-for="(item,index) in category" @click="handleCategory(index)" :class="nowIndex==index? 'active':''">{{item.title}}</li>
                 </ul>
             </div>
 
@@ -49,11 +49,14 @@
         data(){
           return{
               cateList:{},
-              cateItem:[]
+              cateItem:[],
+              nowIndex:0
           }
         },
         created(){
-            this.getCategory()
+            this.getCategory();
+            this.cateList=this.category[0];
+            this.cateItem = this.category[0].children;
         },
         methods:{
             back(){
@@ -63,10 +66,10 @@
                 getCategory:"classify/getCategory"
             }),
             handleCategory(index){
-                this.cateList=this.category[index]
-
+                this.nowIndex = index;
+                this.cateList=this.category[index];
                 this.cateItem = this.category[index].children;
-                console.log(this.cateItem)
+                //console.log(this.cateItem)
             }
         },
         computed:{
@@ -137,8 +140,12 @@
     /*sticky*/
     .sticky{
         width:1.875rem;
-
         background: #f5f5f5;
+    }
+    .sticky ul .active{
+        color: #f21c1c;
+        background: #fff;
+        border-left:2px solid #f21c1c;
     }
     .sticky ul li{
         height: 0.88rem;
@@ -147,13 +154,11 @@
         justify-content: center;
         align-items: center;
         padding:0 0.16rem;
-    }
-    .sticky ul li a{
-        display: block;
         font-size: 14px;
         font-weight: 500;
         color: #333;
     }
+   
     .cate-child{
         width: 5.625rem;
         overflow: auto;

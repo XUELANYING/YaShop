@@ -4,6 +4,7 @@ export default {
     name: "mine",
     meta:{
         tabFlag:true,
-        title:"我的"
+        title:"我的",
+        index:4
     }
 }

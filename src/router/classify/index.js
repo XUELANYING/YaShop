@@ -4,6 +4,7 @@ export default {
     name: "classify",
     meta:{
         tabFlag:false,
-        title:"分类"
+        title:"分类",
+        index:1
     }
 }

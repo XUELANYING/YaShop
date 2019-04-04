@@ -1,11 +1,15 @@
 import {getCategory} from "../../api/api.js"
 export default {
     state:{
-        category:[]
+        category:[],
+        firstCate:null,
+        firstChilds:null
     },
     mutations: {
         getMutationCategory(state, params) {
             state.category = params
+            state.firstCate = params[0]
+            state.firstChilds = params[0].children
             //console.log(state.category)
         },
 

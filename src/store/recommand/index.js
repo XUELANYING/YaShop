@@ -4,7 +4,10 @@ export default {
         substantialList:[],
         pageList:[],
         happyShare:[],
-        icon:[]
+        icon:[],
+        banner:[],
+        headline:[],
+        details:[]
     },
     mutations: {
         getMutationSubstantial(state, params) {
@@ -12,11 +15,16 @@ export default {
             //console.log(params)
         },
         getMutationPageList(state, params) {
+            //banner
+            state.banner=params.floor[0].content;
+            //头条
+            state.headline = params.floor[4].content
             //好货
             state.pageList = params.floor[22].content;
             for(var i = 0 ; i<params.floor[23].content.length;i++){
                 state.pageList.push(params.floor[23].content[i])
             }
+           // console.log(state.pageList)
             //乐享生活
             for (var i = 15;i < 18;i++){
                 for (var j = 0;j<params.floor[i].content.length;j++){
@@ -28,6 +36,7 @@ export default {
             console.log(state.icon)
             //console.log(state.happyShare)
             //console.log(state.pageList)
+
         },
     },
     actions:{

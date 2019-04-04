@@ -11,3 +11,7 @@ export const getHotCity = () => http("get","/api/web/api/area/hotArea/v1");
 export const getCityList = (op=1) =>http("get","/api/web/api/area/allAreaTree/v1",{optimize:op})
 
 export const getCategory = () => http("get","/api/web/api/products/category/v1")
+
+export const getDetails = (id) => http("get","/api/web/api/sc/products/getDetailStatic/v2",{ppid:id});
+
+export const getActivity= (from,flag,id) => http("get","/api/web/api/cc/products/productCityDetail/v4?from=&shopFlag=false&ppid=75045",{from:from,shopFlag:flag,ppid:id});

@@ -55,8 +55,6 @@
         },
         created(){
             this.getCategory();
-            this.cateList=this.category[0];
-            this.cateItem = this.category[0].children;
         },
         methods:{
             back(){
@@ -75,6 +73,8 @@
         computed:{
             ...mapState({
                 category:state => state.classify.category,
+                firstChilds:state =>state.classify.firstChilds,
+                firstCate:state =>state.classify.firstCate
             })
         }
     }

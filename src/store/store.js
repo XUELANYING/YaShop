@@ -4,6 +4,7 @@ import recommand from './recommand/index'
 import oldtonew from './oldtonew/index'
 import stores from './stores/index'
 import classify from './classify/index'
+import product from './product/index'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         recommand,
         oldtonew,
         stores,
-        classify
+        classify,
+        product
     }
 })

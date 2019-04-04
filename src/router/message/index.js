@@ -4,6 +4,7 @@ export default {
     name: "message",
     meta:{
         tabFlag:false,
-        title:"消息"
+        title:"消息",
+        index:2
     }
 }

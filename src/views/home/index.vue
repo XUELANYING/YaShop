@@ -9,6 +9,7 @@
 
 <script>
     import {mapActions} from 'vuex'
+
     import Head from '../../common/head'
     import Foot from '../../common/tabbar'
     import Recommand from '../../components/recommand'
@@ -17,8 +18,10 @@
     import Headlines from '../../components/headlines'
 
 
+
     export default {
         created() {
+           /* this.getActionBanner()*/
             this.getSubstantial();
             this.getPageList();
 
@@ -44,6 +47,7 @@
             })
 
         },
+
         data() {
             return {
                 curView: "Recommand",
@@ -61,7 +65,6 @@
             ...mapActions({
                 getSubstantial: "recommand/getSubstantial",
                 getPageList:"recommand/getPageList",
-
             })
         }
 

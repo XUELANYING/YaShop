@@ -4,6 +4,7 @@ export default {
     name: "home",
     meta:{
         title:"首页",
-        tabFlag:true
+        tabFlag:true,
+        index:0
     }
 }

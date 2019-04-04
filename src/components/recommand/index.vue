@@ -2,14 +2,17 @@
         <div class="mainC">
             <!--轮播图-->
             <div class="nav">
-                <div class="nav-box">
-                    <ul>
-                        <li>
-                            <img src="https://img2.yaya.cn/newstatic/1383/c9e6d653731127.jpg.webp" alt="">
-                        </li>
-                    </ul>
-                </div>
+                    <div class="swiper-container navbox" ref="navBox">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" v-for="item in banner">
+                                <img :src="item.imagePath" alt="">
+                            </div>
+                        </div>
+                        <!-- 如果需要分页器 -->
+                        <div class="swiper-pagination"></div>
+                    </div>
             </div>
+
             <!--图片banner-->
             <div class="floor-img">
                 <a href="#" v-for="item in icon">
@@ -21,12 +24,18 @@
             <div class="floor-tops">
                 <img src="//img2.yaya.cn/m/static/assets/news-yaya.99199d98b7d678f8666ff3794f55e550.png" alt="">
                 <div class="floor-tops-box">
-                    <a href="#">
-                        <span>【喜闹元宵】一元复始 万象更新 新年购机最高立减1500元</span>
-                        <div>
-                            <img src="" alt="">
+
+                    <div class="swiper-container" ref="head">
+                        <div class="swiper-wrapper">
+                            <a href="#" v-for="item in headline">
+                                <span>{{item.title}}</span>
+                               <!-- <div class="swiper-slide">
+                                     <img :src="item.picture" alt="">
+                                </div>-->
+                            </a>
                         </div>
-                    </a>
+                    </div>
+
                 </div>
             </div>
 
@@ -69,7 +78,7 @@
                 </div>
                 <div class="floor-con">
                     <!--item-->
-                    <div class="floor-item" v-for="(item,index) in recommandList">
+                    <router-link class="floor-item" v-for="(item,index) in recommandList" tag="div" :to="{name:'product',params:{shopFlag:item.shopFlag,id:item.id+''}}" >
                         <div class="floor-item-img">
                             <img :src="item.imagePath" alt="">
                         </div>
@@ -78,7 +87,7 @@
                             <p class="item-detail">{{item.sellingPoint}}</p>
                             <p class="item-price">{{item.price}}</p>
                         </div>
-                    </div>
+                    </router-link>
 
                     <div class="floor-item item-more">
                         查看全部
@@ -202,7 +211,7 @@
                 <div class="floor-goods-box">
 
 
-                    <div class="item-goods" v-for="(item,index) in pageList">
+                    <router-link class="item-goods" v-for="(item,index) in pageList" tag="div" :to="{name:'product',params:{id:item.ppid+''}}">
                         <div class="goods-img">
                             <img :src="item.imagePath" alt="">
                         </div>
@@ -213,27 +222,51 @@
                             <p class="goods-name">{{item.title}}</p>
                             <p class="goods-price">{{item.price}}</p>
                         </div>
-                    </div>
-
+                    </router-link>
                 </div>
 
             </div>
-
-
-
         </div>
 </template>
 
 <script>
     import {mapState} from 'vuex'
+    import Swiper from 'swiper'
     export default {
         name: "recommand",
+        data(){
+            return{
+
+            }
+        },
         computed:{
             ...mapState({
                 recommandList:state=>state.recommand.substantialList,
                 pageList:state=>state.recommand.pageList,
-                icon:state=>state.recommand.icon
+                icon:state=>state.recommand.icon,
+                banner:state=>state.recommand.banner,
+                headline:state=>state.recommand.headline
             })
+        },
+        mounted(){
+            new Swiper(this.$refs.navBox)
+            new Swiper(this.$refs.head)
+        },
+        watch:{
+            banner(){
+                this.$nextTick(()=>{
+                    new Swiper(this.$refs.navBox,{
+                        loop: true,
+                        autoplay:{
+                            disableOnInteraction:false
+                        },
+                        pagination:{
+                            el:".navBox"
+                        }
+                    });
+                });
+
+            }
         }
     }
 </script>
@@ -253,13 +286,13 @@
         justify-content: center;
         padding: 0.15rem;
     }
-    .nav-box,.nav-box li{
+    .navbox,navbox>div>div{
         height: 3.45rem;
         width:6.9rem;
         border-radius: 0.1rem;
         overflow: hidden;
     }
-    .nav-box ul li img{
+    .navbox img{
         width:100%;
         height: 100%;
     }
@@ -292,7 +325,7 @@
         width: 1.36rem;
         height: 0.31rem;
     }
-    .floor-tops-box>a{
+    .floor-tops-box a{
         display: block;
         height: 0.68rem;
         width: 5.06rem;
@@ -300,7 +333,7 @@
         align-items: center;
         color: #333;
     }
-    .floor-tops-box>a>span{
+    .floor-tops-box a>span{
         height: 0.336rem;
         width: 3.7rem;
         white-space: nowrap;

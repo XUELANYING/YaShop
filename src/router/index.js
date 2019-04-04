@@ -7,6 +7,7 @@ import Mine from './mine'
 import Shopcar from './shopcar'
 import Search from './search'
 import Stores from './stores'
+import Product from './product'
 
 Vue.use(Router);
 
@@ -26,6 +27,7 @@ const router = new Router({
         Shopcar,
         Search,
         Stores,
+        Product,
         {
             path: "**",
             redirect: "/home",

@@ -22,13 +22,13 @@
 
 
             </div>
-
+        <Map/>
         <div class="storesTabs">
             <div>
-                <span>全部</span>
+                <span @click="handleMap(1)" :class="nty == 1? 'active':''">全部</span>
             </div>
             <div>
-                <span class="active">附近门店</span>
+                <span @click="handleMap(2)"  :class="nty == 2? 'active':''">附近门店</span>
             </div>
         </div>
         <transition name="slide-fade">
@@ -71,6 +71,7 @@
     import Province from './cityTab/province'
     import Municipality from './cityTab/municipality'
     import Area from './cityTab/area'
+    import Map from './map'
 
     export default {
         name: "stores",
@@ -102,6 +103,7 @@
                 isShow:false,
                 isShows:false,
                 curView:"Province",
+                nty:1
 
 
             }
@@ -115,6 +117,9 @@
                     this.isShow = true;
                     this.isShows = true
                 }
+            },
+            handleMap(n){
+                this.nty = n
             },
             banck(){
                 this.$router.back()
@@ -135,7 +140,8 @@
         components:{
             Province,
             Municipality,
-            Area
+            Area,
+            Map
         }
 
     }
@@ -197,13 +203,13 @@
         align-items: center;
         font-size: 14px;
     }
-    storesTabs>.active{
+    .storesTabs>div>.active{
         color: #f21c1c;
         border-bottom: 2px solid #f21c1c;
         height: 0.86rem;
+        line-height: 0.9rem;
         font-size: 15px;
         font-weight: 500;
-        margin-bottom: -1px;
     }
 
     /*动态*/

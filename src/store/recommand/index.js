@@ -2,7 +2,7 @@ import {getSubstantial,getPageList} from "../../api/api.js"
 export default {
     state:{
         substantialList:[],
-        pageList:[],
+        pageList:JSON.parse(window.sessionStorage.getItem("pageList")) || [],
         happyShare:[],
         icon:[],
         banner:[],
@@ -24,6 +24,7 @@ export default {
             for(var i = 0 ; i<params.floor[23].content.length;i++){
                 state.pageList.push(params.floor[23].content[i])
             }
+            window.sessionStorage.setItem('pageList', JSON.stringify(state.pageList))
            // console.log(state.pageList)
             //乐享生活
             for (var i = 15;i < 18;i++){

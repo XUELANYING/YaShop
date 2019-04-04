@@ -6,7 +6,7 @@
             </div>
             <div class="details-tab">
                 <ul>
-                    <li>商品</li>
+                    <li class="cur">商品</li>
                     <li>评论</li>
                     <li>详情</li>
                 </ul>
@@ -52,7 +52,7 @@
         <div class="product-wrapper">
             <p class="product-title">{{detailList.productName +" "+ detailList.skuName + tag}}</p>
             <p class="product-profile">{{activities.profile.title}}</p>
-            <p class="product-price">{{detailList.price}}</p>
+            <p class="product-price">￥{{detailList.price}}</p>
 
             <div class="option-row">
                 <span><i class="icon icon-trends"></i>价格走势</span>
@@ -127,20 +127,20 @@
         <div class="recommendPackage">
             <p class="recommendPackage-title">推荐套餐</p>
             <div class="recommendPackage-con">
-                <img :src="activities.recommendPackage.mainProduct.picUrl" alt="">
+                <img :src="mainList.picUrl" alt="">
                 <div>
-                    <p class="recom-name">{{activities.recommendPackage.mainProduct.name}}</p>
-                    <p class="recom-price">{{activities.recommendPackage.mainProduct.price}}</p>
+                    <p class="recom-name">{{mainList.name}}</p>
+                    <p class="recom-price">￥{{mainList.price}}</p>
                 </div>
             </div>
-            <div class="recommendPackage-goodList" v-for="item in activities.recommendPackage.goodsList">
+            <div class="recommendPackage-goodList" v-for="item in partList">
                 <span></span>
                 <img :src="item.picUrl" alt="">
                 <div>
                     <p>{{item.name}}</p>
                     <p class="recom-price">
-                        <span>{{item.reducedPrice}}</span>
-                        <span class="margin-left02">{{item.price}}</span>
+                        <span>￥{{item.reducedPrice}}</span>
+                        <span class="margin-left02">￥{{item.price}}</span>
                     </p>
                 </div>
             </div>
@@ -154,15 +154,14 @@
                     <p>查看更多 <i class="fa fa-angle-right grey-9 ml-5 font-18"></i></p>
                 </div>
             <div>
-                <div class="swiper-container mySwiper" ref="myswiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide img-slide" v-for="item in recommendList">
-                            <img :src="item.imagePath" alt="">
-                            <p class="slide-name">{{item.name}}</p>
-                            <p class="swiper-price">{{item.price}}</p>
-                        </div>
+                <div class="mySwiper">
+                    <div class="img-slide" v-for="item in recommendList">
+                        <img :src="item.imagePath" alt="">
+                        <p class="slide-name">{{item.name}}</p>
+                        <p class="swiper-price">{{item.price | formatMoney}}</p>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -243,7 +242,9 @@
                 },
                 tag:state=>state.product.tags,
                 activities:state=>state.product.activities,
-                recommendList:state=>state.product.recommendList
+                recommendList:state=>state.product.recommendList,
+                partList:state=>state.product.partList,
+                mainList:state=>state.product.mainList,
             })
         },
         methods:{
@@ -268,16 +269,21 @@
             recommendList(){
                 this.$nextTick(()=>{
                     new Swiper(this.$refs.myswiper,{
-                        autoplay:{
+                        /*autoplay:{
                             disableOnInteraction:false
-                        },
+                        },*/
                         pagination:{
                             el:".mySwiper"
                         },
-                        slidesPerView: 3,//一行显示3个
-                        slidesPerColumn: 2,//显示2行
+                       /* slidesPerView: 3,//一行显示3个
+                        slidesPerColumn: 2,//显示2行*/
                     });
                 })
+            }
+        },
+        filters:{
+            formatMoney:function (value) {
+                return "￥"+value
             }
         }
     }
@@ -599,13 +605,16 @@
     .img-slide{
         height: 3.4rem;
         width: 2rem;
-        background: grey;
+        background: #fff;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow: hidden;
     }
     .img-slide img{
         margin-top: 0.2rem;
         height: 2rem;
         width: 2rem;
-        background: green;
     }
     .img-slide .slide-name{
         color: #6b6b6b;
@@ -625,9 +634,13 @@
         margin-right: auto;
     }*/
     .mySwiper{
-        height: 7.4rem;
+        height: 6.8rem;
         width: 6.94rem;
-        background: green;
+        background: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        overflow: hidden;
     }
     .comment{
         margin-top: 0.2rem;
@@ -660,7 +673,7 @@
         padding-left: 0.2rem;
     }
     .comment-con{
-        height: 0.76rem;
+        min-height: 0.76rem;
         width: 6.94rem;
         margin-top: 0.175rem;
         color: #333;
@@ -692,5 +705,9 @@
     .start{
         margin-left: 0.2rem;
         color: #f9be00;
+    }
+
+    .cur{
+        border-bottom: 2px solid #9F9F9F;
     }
 </style>

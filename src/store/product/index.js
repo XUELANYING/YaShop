@@ -1,10 +1,12 @@
 import {getDetails,getActivity} from "../../api/api.js"
 export default {
     state:{
-        detailList:{},
+        detailList:JSON.parse(window.sessionStorage.getItem("detailList")) || [],
         tags:"",
-        activities:{},
-        recommendList:[]
+        activities:JSON.parse(window.sessionStorage.getItem("activities")) || [],
+        recommendList:JSON.parse(window.sessionStorage.getItem("recommendList")) || [],
+        partList:JSON.parse(window.sessionStorage.getItem("partList")) || [],
+        mainList:JSON.parse(window.sessionStorage.getItem("mainList")) || []
     },
     mutations:{
         getMutationDetails(state,params){
@@ -13,14 +15,20 @@ export default {
             for (var i = 0 ; i < state.detailList.tags.length ; i++ ){
                 state.tags += state.detailList.tags[i]
             }
-
+            window.sessionStorage.setItem('detailList', JSON.stringify(state.detailList))
             console.log(state.detailList)
         },
         getMutationActivity(state,params){
             state.activities=params
             console.log(state.activities)
-            state.recommendList = params.accessories.list
+            window.sessionStorage.setItem('activities', JSON.stringify(state.activities))
+            state.recommendList = params.accessories.list;
+            window.sessionStorage.setItem('recommendList', JSON.stringify(state.recommendList))
             console.log( state.recommendList)
+            state.partList = params.recommendPackage.goodsList;
+            window.sessionStorage.setItem('partList', JSON.stringify(state.partList))
+            state.mainList = params.recommendPackage.mainProduct;
+            window.sessionStorage.setItem('mainList', JSON.stringify(state.mainList))
         }
 
     },

@@ -7,6 +7,8 @@ import classify from './classify/index'
 import product from './product/index'
 import headline from './healines/index'
 import repair from './repair/index'
+import searchlist from './search/index'
+import Minelist from './mine/index'
 
 Vue.use(Vuex)
 
@@ -18,6 +20,8 @@ export default new Vuex.Store({
         classify,
         product,
         headline,
-        repair
+        repair,
+        searchlist,
+        Minelist
     }
 })

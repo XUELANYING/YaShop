@@ -8,6 +8,9 @@ import Shopcar from './shopcar'
 import Search from './search'
 import Stores from './stores'
 import Product from './product'
+import SetMine from './setMine'
+import Userlogin from './uselogin'
+import Register from './register'
 
 Vue.use(Router);
 
@@ -28,6 +31,9 @@ const router = new Router({
         Search,
         Stores,
         Product,
+        Register,
+        Userlogin,
+        SetMine,
         {
             path: "**",
             redirect: "/home",

@@ -2,13 +2,16 @@
     <div class="home">
         <Head/>
         <div class="container">
-            <component :is="curView"></component>
+            <keep-alive>
+                <component :is="curView"></component>
+            </keep-alive>
+
         </div>
     </div>
 </template>
 
 <script>
-    import {mapActions} from 'vuex'
+
 
     import Head from '../../common/head'
     import Foot from '../../common/tabbar'
@@ -22,8 +25,6 @@
     export default {
         created() {
            /* this.getActionBanner()*/
-            this.getSubstantial();
-            this.getPageList();
 
             this.Observer.$on("handleTo", (data) => {
                 switch (data) {
@@ -61,12 +62,7 @@
             Repair,
             Headlines
         },
-        methods: {
-            ...mapActions({
-                getSubstantial: "recommand/getSubstantial",
-                getPageList:"recommand/getPageList",
-            })
-        }
+
 
     }
 </script>

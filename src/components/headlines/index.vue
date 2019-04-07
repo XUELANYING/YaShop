@@ -1,210 +1,97 @@
 <template>
+    <BScroll ref="headline">
     <div class="mainC">
         <!---->
-        <div class="item">
-            <div class="item-tit">
-                <div>
-                    <p class="tit-tag">3.8女王节 给本宫打折 iPhone XR女王价￥4970</p>
-                    <p class="olist">
-                        <span class="active"></span>
-                        <span></span>
-                    </p>
-                </div>
 
-            </div>
-            <!---->
-            <div class="news-item">
-                <div class="news-img">
-                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                </div>
-                <div class="news-con">
-                    <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                    <p class="news-con-bottom">
-                        <span>小呀</span>
-                        <span>85阅读</span>
-                    </p>
-                </div>
-            </div>
-            <!---->
-            <div class="news-item">
-                <div class="news-img">
-                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                </div>
-                <div class="news-con">
-                    <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                    <p class="news-con-bottom">
-                        <span>小呀</span>
-                        <span>85阅读</span>
-                    </p>
-                </div>
-            </div>
-            <div class="news-item">
-                <div class="news-img">
-                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                </div>
-                <div class="news-con">
-                    <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                    <p class="news-con-bottom">
-                        <span>小呀</span>
-                        <span>85阅读</span>
-                    </p>
-                </div>
-            </div>
-            <div class="news-item">
-                <div class="news-img">
-                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                </div>
-                <div class="news-con">
-                    <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                    <p class="news-con-bottom">
-                        <span>小呀</span>
-                        <span>85阅读</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!---->
-        <div class="item">
-            <div class="item-tit">
-                <div>
-                    <p class="tit-tag">3.8女王节 给本宫打折 iPhone XR女王价￥4970</p>
-                    <p class="olist">
-                        <span class="active"></span>
-                        <span></span>
-                    </p>
-                </div>
-
-            </div>
-            <!---->
-            <div class="news-item">
-                <div class="news-img">
-                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                </div>
-                <div class="news-con">
-                    <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                    <p class="news-con-bottom">
-                        <span>小呀</span>
-                        <span>85阅读</span>
-                    </p>
-                </div>
-            </div>
-            <!---->
-            <div class="news-item">
-                <div class="news-img">
-                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                </div>
-                <div class="news-con">
-                    <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                    <p class="news-con-bottom">
-                        <span>小呀</span>
-                        <span>85阅读</span>
-                    </p>
-                </div>
-            </div>
-            <div class="news-item">
-                <div class="news-img">
-                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                </div>
-                <div class="news-con">
-                    <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                    <p class="news-con-bottom">
-                        <span>小呀</span>
-                        <span>85阅读</span>
-                    </p>
-                </div>
-            </div>
-            <div class="news-item">
-                <div class="news-img">
-                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                </div>
-                <div class="news-con">
-                    <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                    <p class="news-con-bottom">
-                        <span>小呀</span>
-                        <span>85阅读</span>
-                    </p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="item-tit">
+            <Banner>
+                <div class="swiper-slide item-tit" v-for="item in banner" ref="topsbanner">
+                    <img :src="item.imagePath" alt="">
                     <div>
-                        <p class="tit-tag">3.8女王节 给本宫打折 iPhone XR女王价￥4970</p>
+
+                        <p class="tit-tag">{{item.title}}</p>
                         <p class="olist">
                             <span class="active"></span>
                             <span></span>
                         </p>
                     </div>
+                </div>
+            </Banner>
 
+            <div v-for="item in headlineList" :class="item.big == 0? 'news-item':'item-tit'" >
+                <div class="news-img">
+                    <img :src="item.imagePath" alt="">
                 </div>
-                <!---->
-                <div class="news-item">
-                    <div class="news-img">
-                        <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                    </div>
-                    <div class="news-con">
-                        <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                        <p class="news-con-bottom">
-                            <span>小呀</span>
-                            <span>85阅读</span>
-                        </p>
-                    </div>
-                </div>
-                <!---->
-                <div class="news-item">
-                    <div class="news-img">
-                        <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                    </div>
-                    <div class="news-con">
-                        <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                        <p class="news-con-bottom">
-                            <span>小呀</span>
-                            <span>85阅读</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="news-img">
-                        <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                    </div>
-                    <div class="news-con">
-                        <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                        <p class="news-con-bottom">
-                            <span>小呀</span>
-                            <span>85阅读</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="news-img">
-                        <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
-                    </div>
-                    <div class="news-con">
-                        <p class="news-con-tit">【公告】丫丫网2019春节放假通知</p>
-                        <p class="news-con-bottom">
-                            <span>小呀</span>
-                            <span>85阅读</span>
-                        </p>
-                    </div>
+                <div :class="item.big == 0? 'news-con':''">
+                    <p :class="item.big == 0 ? 'news-con-tit':'tit-tag'">{{item.title}}</p>
+                    <p :class="item.big == 0 ? 'news-con-bottom':'olist'">
+                        <span v-if="!item.big">{{item.author}}</span>
+                        <span v-if="!item.big">{{item.pageView}}</span>
+                    </p>
                 </div>
             </div>
+
+
+            <!--<div class="item-tit">
+                <div class="news-img">
+                    <img src="https://img2.yaya.cn//pic/edt/news/20190128/20190128141416_4786.jpg" alt="">
+                </div>
+            <div>
+                <p class="tit-tag">3.8女王节 给本宫打折 iPhone XR女王价￥4970</p>
+                <p class="olist">
+                    <span class="active"></span>
+                    <span></span>
+                </p>
+            </div>-->
+
         </div>
-    </div>
+    </BScroll>
 </template>
 
 <script>
+    import {mapState,mapActions} from 'vuex'
     export default {
-        name: "headlines"
+        name: "headlines",
+        created(){
+            this.getHotBrands("1039463340404862981",1,0)
+        },
+        computed:{
+            ...mapState({
+                banner:state=>state.headline.banner,
+                headlineList:state=>state.headline.headlineList
+            })
+        },
+        methods:{
+            ...mapActions({
+                getHotBrands:"headline/getHotBrands",
+            })
+        },
+        mounted(){
+          this.$refs.topsbanner;
+          this.$refs.headline;
+        },
+        watch:{
+
+        }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    .mainC{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        overflow: auto;
+        padding-bottom: 2.88rem;
+    }
     /*内容*/
-    .item-tit{
+    .item-tit,.item-tit .news-img{
         height: 3.75rem;
         width: 100%;
-        background: url("https://img2.yaya.cn//pic/edt/news/20190314/20190314205927_0687.jpg")50%;
-        background-size: cover;
         position: relative;
+    }
+    .news-img img{
+        height: 100%;
+        width: 100%;
     }
     .item-tit>div{
         height: 0.8rem;
@@ -216,13 +103,12 @@
         color: #fff;
         font-size: 14px;
         line-height: 0.8rem;
-        padding: 0 0.2rem;
         display: flex;
         justify-content: space-around;
         align-items: center;
     }
     .item-tit>div>.tit-tag{
-        width: 5.7rem;
+        width:100%;
         height: 100%;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -265,12 +151,14 @@
         flex-direction: column;
         justify-content: space-between;
     }
-    .news-con .news-con-bottom{
+   .news-con-bottom{
         display: flex;
         justify-content: space-between;
         color: #9c9c9c;
+        width: 100%;
     }
     .news-con .news-con-tit{
         font-size: 15px;
+        color: #333;
     }
 </style>

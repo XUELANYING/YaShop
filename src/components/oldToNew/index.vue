@@ -1,14 +1,13 @@
 <template>
-    <div class="mainC">
+    <BScroll ref="shopWrapper">
+         <div class="mainC">
         <!--轮播图-->
         <div class="nav">
-            <div class="nav-box">
-                <ul>
-                    <li>
-                        <img src="https://img2.yaya.cn/newstatic/1383/c9e6d653731127.jpg.webp" alt="">
-                    </li>
-                </ul>
-            </div>
+           <Banner ref="recomBanner">
+               <div class="swiper-slide" v-for="item in banner">
+                   <img :src="item.imagePath" alt="">
+               </div>
+           </Banner>
         </div>
         <!--图片banner-->
         <div class="floor-img">
@@ -104,13 +103,14 @@
 
 
     </div>
+    </BScroll>
 </template>
 
 <script>
     import {mapState,mapActions} from 'vuex'
     export default {
         created(){
-            this.getHotBrands();
+            this.getHotBrands("1039463340404862980",1,0);
         },
         name: "oldtonew",
         computed:{
@@ -122,13 +122,34 @@
                 hotBrands:state=>state.oldtonew.hotBrands,
                 hotmoblie:state=>state.oldtonew.hotmoblie,
                 server:state=>state.oldtonew.server,
-                access:state=>state.oldtonew.access
+                access:state=>state.oldtonew.access,
+                banner:state=>state.oldtonew.banner,
             })
         },
         methods:{
             ...mapActions({
                 getHotBrands:"oldtonew/getHotBrands"
             })
+        },
+        mounted(){
+            this.$refs.shopWrapper;
+            this.$refs.recomBanner;
+        },
+        watch:{
+          /*  banner(){
+                this.$nextTick(()=>{
+                    new Swiper(this.$refs.recomBanner,{
+                        loop: true,
+                        autoplay:{
+                            disableOnInteraction:false
+                        },
+                        pagination:{
+                            el:".navBox"
+                        }
+                    });
+                });
+
+            }*/
         }
     }
 </script>
@@ -139,6 +160,7 @@
         flex-direction: column;
         width: 100%;
         overflow: auto;
+        margin-bottom: 2.88rem;
     }
 
     /**/

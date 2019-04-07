@@ -1,4 +1,5 @@
 <template>
+
     <div>
         <div id="head">
             <div class="wh44">
@@ -23,19 +24,22 @@
             </div>
 
             <!--分类右边-->
+
             <div class="cate-child">
-                <a href="#">
-                    <img :src="cateList.picture" alt="">
+                <a href="#" v-if="category[nowIndex]">
+                    <img :src="category[nowIndex].picture">
                 </a>
-                <div class="cate-item-wrap" v-for="(item,index) in cateItem">
-                    <div class="cate-item-title">{{item.title}}</div>
+
+                <div class="cate-item-wrap" v-if="category[nowIndex].children" v-for="(item,index) in category[nowIndex].children">
+                    <div class="cate-item-title" v-text="item.title"></div>
                     <div class="item-wrap">
-                        <a href="#" v-for="val in cateItem[index].children">
+                        <a href="#" v-if="category[nowIndex].children.length > 0" v-for="(val,ind) in item.children">
                             <img :src="val.picture" alt="">
-                            <span>{{val.title}}</span>
+                            <span v-text="val.title"></span>
                         </a>
                     </div>
                 </div>
+
                 </div>
             </div>
     </div>
@@ -48,8 +52,6 @@
         name: "classify",
         data(){
           return{
-              cateList:{},
-              cateItem:[],
               nowIndex:0
           }
         },
@@ -65,8 +67,6 @@
             }),
             handleCategory(index){
                 this.nowIndex = index;
-                this.cateList=this.category[index];
-                this.cateItem = this.category[index].children;
                 //console.log(this.cateItem)
             }
         },
@@ -126,7 +126,6 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 100%;
         background: #fff;
         padding-top: 0.88rem;
     }
@@ -140,6 +139,7 @@
     /*sticky*/
     .sticky{
         width:1.875rem;
+        height: 100%;
         background: #f5f5f5;
     }
     .sticky ul .active{
@@ -161,11 +161,15 @@
    
     .cate-child{
         width: 5.625rem;
+        height:12rem;
+        display: flex;
+        flex-direction: column;
         overflow: auto;
     }
     .cate-child>a{
         display: block;
         width:5.25rem;
+        flex-shrink: 0;
         height: 1.75rem;
         margin: 0.2rem;
         margin-bottom: 0rem;
@@ -182,12 +186,14 @@
         border-radius: 0.1rem;
         overflow: hidden;
         margin: 0.3rem 0.195rem;
+        flex-shrink: 0;
     }
     .cate-item-title{
         padding: 0 0.2rem;
         font-size: 14px;
         height: 0.6rem;
         line-height: 0.6rem;
+
     }
     .item-wrap{
         width: 100%;
@@ -210,5 +216,12 @@
     }
     .item-wrap>a>span{
         color: #333;
+    }
+    .fade-out-enter-active, .fade-out-leave-active {
+        transition: opacity 2s;
+    }
+
+    .fade-out-enter, .fade-out-leave-to {
+        opacity: 0;
     }
 </style>

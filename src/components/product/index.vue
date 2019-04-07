@@ -1,5 +1,7 @@
 <template>
+    <BScroll ref="productbs">
     <div class="product">
+
         <div id="head">
             <div class="wh44">
                 <i class="fa fa-angle-left font-30 back" @click="back()"></i>
@@ -7,8 +9,8 @@
             <div class="details-tab">
                 <ul>
                     <li class="cur">商品</li>
-                    <li>评论</li>
-                    <li>详情</li>
+                    <li @click="handleScrollTo()">评论</li>
+                    <li @click="handleScroll()">详情</li>
                 </ul>
             </div>
             <div class="wh44">
@@ -16,26 +18,31 @@
             </div>
 
         </div>
-        <!--<h2>商品详情{{id}}======{{details}}</h2>-->
-      <!--  <div class="pic-group">
-            <div class="pic-box">
-                <mt-swipe :auto="2000">
-                    <mt-swipe-item v-for="item in detailList">
-                        <a :href="item.href" rel="external nofollow" >
-                            <img :src="item.imagePath"/>
-                        </a>
-                    </mt-swipe-item>
-                </mt-swipe>
-            </div>
-        </div>-->
+
         <div class="banner">
-            <mt-swipe>
+           <!-- <mt-swipe>
                 <mt-swipe-item v-for="item in detailList.pictures">
                     <a>
                         <img :src="item" class="img"/>
                     </a>
                 </mt-swipe-item>
-            </mt-swipe>
+            </mt-swipe>-->
+                <div class="swiper-container navbox" ref="navBox">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <video-player  class="video-player vjs-custom-skin"
+                                           ref="videoPlayer"
+                                           :playsinline="true"
+                                           :options="playerOptions"
+                            ></video-player>
+                        </div>
+                        <div class="swiper-slide" v-for="item in detailList.pictures">
+                            <img :src="item" alt="">
+                        </div>
+                    </div>
+                    <!-- 如果需要分页器 -->
+                    <div class="swiper-pagination"></div>
+                </div>
 
            <!-- <div class="swiper-container banner-pagination">
                 <div class="swiper-wrapper">
@@ -165,7 +172,7 @@
             </div>
         </div>
 
-        <div class="comment">
+        <div class="comment" ref="comment">
             <div class="comment-tit">
                 <p>评论</p>
                 <p>更多评价<i class="fa fa-angle-right grey-9 ml-5 font-18"></i></p>
@@ -200,34 +207,56 @@
             </div>
 
         </div>
+
+            <Introduction/>
+
+
     </div>
+    </BScroll>
 </template>
 
 <script>
     import {mapState,mapActions} from 'vuex'
     import {Swipe, SwipeItem} from 'mint-ui'
     import 'mint-ui/lib/style.css'
+    import Introduction from './introduction'
+
     export default {
         created(){
             this. getDetails(this.id);
-            this.getActivity("",this.shopFlag,this.id)
-            /*for (var i = 0 ; i < this.pageList.length;i++){
-                if(this.id==this.pageList[i].id){
-                    this.details=this.pageList[i]
-                   this.$store.state.recommand.details = this.details
-                    break
-                }
-            }*/
-            window.localStorage.setItem("product",JSON.stringify(this.details))
-
-
+            this.getActivity(this.shopFlag,this.id)
+            this.detailIntroduction(this.ppid)
         },
         name: "product",
         data(){
             return{
-                details:{
+                details:{},
+                // 视频播放
+                playerOptions: {
+                    playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
+                    autoplay: false, //如果true,浏览器准备好时开始回放。
+                    muted: false, // 默认情况下将会消除任何音频。
+                    loop: false, // 导致视频一结束就重新开始。
+                    preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+                    language: 'zh-CN',
+                    aspectRatio: '1:1', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+                    fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+                    sources: [{
+                        type: "",
+                        src: ''//url地址
+                    }],
+                    poster: "", //你的封面地址
+                    // width: document.documentElement.clientWidth,
+                    notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+                    controlBar: {
+                        timeDivider: true,
+                        durationDisplay: true,
+                        remainingTimeDisplay: false,
+                        fullscreenToggle: true  //全屏按钮
+                    }
                 }
             }
+
         },
         props:{
             id:{
@@ -250,28 +279,35 @@
         methods:{
             ...mapActions({
                getDetails:"product/getDetails",
-                getActivity:"product/getActivity"
+                getActivity:"product/getActivity",
+                detailIntroduction:"product/detailIntroduction"
             }),
             back(){
                 this.$router.back()
-            }
+            },
+            handleScrollTo(){
+                let to = this.$refs.comment.offsetTop;
+                this.$refs.productbs.handleTo(to)
+            },
         },
         components: {
             'mt-swipe': Swipe,
-            'mt-swipe-item': SwipeItem
+            'mt-swipe-item': SwipeItem,
+            Introduction
         },
         mounted(){
             new Swiper('.mySwiper');
-
+            new Swiper(this.$refs.navBox);
+            this.$refs.productbs
+            this.playerOptions.sources[0].src = this.detailList.video.src
+            this.playerOptions.poster = this.detailList.video.poster
             },
 
         watch:{
             recommendList(){
                 this.$nextTick(()=>{
                     new Swiper(this.$refs.myswiper,{
-                        /*autoplay:{
-                            disableOnInteraction:false
-                        },*/
+
                         pagination:{
                             el:".mySwiper"
                         },
@@ -279,6 +315,17 @@
                         slidesPerColumn: 2,//显示2行*/
                     });
                 })
+            },
+            detailList(){
+                this.$nextTick(()=>{
+                    new Swiper(this.$refs.navBox,{
+                        autoplay:false,
+                        pagination:{
+                            el:".navBox"
+                        }
+                    });
+                });
+
             }
         },
         filters:{
@@ -339,7 +386,7 @@
 
     .banner{
         height: 7.48rem;
-        margin-top: 0.88rem;
+        padding-top: 1rem;
         background: #fff;
     }
      .banner .banner-pagination{
@@ -347,7 +394,7 @@
         width: 100%;
     }
      .swiper-slide{
-         height: 6.98rem;
+         height: 7.3rem;
      }
     .pic-box .mt-swipe a{
         display: block;
@@ -709,5 +756,10 @@
 
     .cur{
         border-bottom: 2px solid #9F9F9F;
+    }
+   .video-js .vjs-icon-placeholder{
+        height: 2rem;
+        width:1.4rem;
+        border-radius: 50%;
     }
 </style>

@@ -1,61 +1,32 @@
 <template>
+    <BScroll ref="repair">
     <div class="mainC">
         <!--轮播图-->
         <div class="nav">
-            <div class="nav-box">
-                <ul>
-                    <li>
-                        <img src="https://img2.yaya.cn/newstatic/1383/c9e6d653731127.jpg.webp" alt="">
-                    </li>
-                </ul>
-            </div>
+            <Banner ref="repairBanner">
+                <div class="swiper-slide" v-for="item in banner">
+                    <img :src="item.imagePath" alt="">
+                </div>
+            </Banner>
         </div>
+
         <!--图片banner-->
         <div class="floor-img">
-            <a href="#">
-                <img src="https://img2.yaya.cn/newstatic/1378/c309507a498708.png.webp" alt="">
+            <a href="#" v-for="item in logo">
+                <img :src="item.imagePath" alt="">
             </a>
-            <a href="#">
-                <img src="https://img2.yaya.cn/newstatic/1378/c309507a498708.png.webp" alt="">
-            </a>
-            <a href="#">
-                <img src="https://img2.yaya.cn/newstatic/1378/c309507a498708.png.webp" alt="">
-            </a>
-            <a href="#">
-                <img src="https://img2.yaya.cn/newstatic/1378/c309507a498708.png.webp" alt="">
-            </a>
-            <a href="#">
-                <img src="https://img2.yaya.cn/newstatic/1378/c309507a498708.png.webp" alt="">
-            </a>
-
         </div>
 
         <!--process-->
         <div class="process">
-            <img src="https://img2.yaya.cn/newstatic/768/36b489156de0f9.png.webp" alt="">
+            <img v-for="item in process" :src="item.imagePath" alt="">
         </div>
 
         <!--recycle-pic-->
         <div class="recycle-pic">
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/918/70c02a76eccedf.png.webp" alt="">
+            <div v-for="item in repairStyle">
+                <img :src="item.imagePath" alt="">
             </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/918/70c02a76eccedf.png.webp" alt="">
-            </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/918/70c02a76eccedf.png.webp" alt="">
-            </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/918/70c02a76eccedf.png.webp" alt="">
-            </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/918/70c02a76eccedf.png.webp" alt="">
-            </div>
-            <div>
-                <img src="https://img2.yaya.cn/newstatic/918/70c02a76eccedf.png.webp" alt="">
-            </div>
-
         </div>
         <div class="re-more">
             <img src="https://img2.yaya.cn/newstatic/767/34063e94ee081c.png.webp" alt="">
@@ -68,18 +39,8 @@
             </div>
             <div class="recommend">
                 <!---->
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/771/364853a67829af.jpg.webp" alt="">
-                </div>
-                <!---->
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/771/364853a67829af.jpg.webp" alt="">
-                </div>
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/771/364853a67829af.jpg.webp" alt="">
-                </div>
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/771/364853a67829af.jpg.webp" alt="">
+                <div v-for="item in yayarecom">
+                    <img :src="item.imagePath" alt="">
                 </div>
             </div>
         </div>
@@ -91,11 +52,8 @@
                 <img src="https://img2.yaya.cn/newstatic/765/340654a87011c6.png.webp" alt="">
             </div>
             <div class="order-img">
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/771/364fb97f729b85.jpg.webp" alt="">
-                </div>
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/766/364fbaa04910af.jpg.webp" alt="">
+                <div v-for="item in threetemp">
+                    <img :src="item.imagePath" alt="">
                 </div>
             </div>
         </div>
@@ -107,11 +65,8 @@
                 <img src="https://img2.yaya.cn/newstatic/766/3406646dfcebca.png.webp" alt="">
             </div>
             <div class="recycle-server-img">
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/765/34066a0f128bbd.png.webp" alt="">
-                </div>
-                <div>
-                    <img src="https://img2.yaya.cn/newstatic/771/34066b39de7bad.png.webp" alt="">
+                <div v-for="item in goodgood">
+                    <img :src="item.imagePath" alt="">
                 </div>
             </div>
 
@@ -127,12 +82,36 @@
 
 
     </div>
-
+    </BScroll>
 </template>
 
 <script>
+    import {mapActions,mapState} from 'vuex'
     export default {
-        name: "index"
+        name: "index",
+        created(){
+            this.getHotBrands("1039463340404862983",1,0)
+        },
+        methods:{
+            ...mapActions({
+                getHotBrands:"repair/getHotBrands"
+            })
+        },
+        computed:{
+            ...mapState({
+                banner:state=>state.repair.banner,
+                logo:state=>state.repair.logo,
+                process:state=>state.repair.process,
+                repairStyle:state=>state.repair.repairStyle,
+                yayarecom:state=>state.repair.yayarecom,
+                threetemp:state=>state.repair.threetemp,
+                goodgood:state=>state.repair.goodgood
+            })
+        },
+        mounted(){
+            this.$refs.repairBanner;
+            this.$refs.repair;
+        }
     }
 </script>
 
@@ -142,6 +121,7 @@
         flex-direction: column;
         width: 100%;
         overflow: auto;
+        padding-bottom: 2.88rem;
     }
     /**/
     .nav{

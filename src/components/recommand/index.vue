@@ -1,16 +1,13 @@
 <template>
+    <BScroll ref="shopWrapper">
         <div class="mainC">
             <!--轮播图-->
             <div class="nav">
-                    <div class="swiper-container navbox" ref="navBox">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" v-for="item in banner">
-                                <img :src="item.imagePath" alt="">
-                            </div>
+                    <Banner ref="reBanner">
+                        <div class="swiper-slide" v-for="item in banner">
+                            <img :src="item.imagePath" alt="">
                         </div>
-                        <!-- 如果需要分页器 -->
-                        <div class="swiper-pagination"></div>
-                    </div>
+                    </Banner>
             </div>
 
             <!--图片banner-->
@@ -227,10 +224,11 @@
 
             </div>
         </div>
+    </BScroll>
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapState,mapActions} from 'vuex'
     import Swiper from 'swiper'
     export default {
         name: "recommand",
@@ -238,6 +236,10 @@
             return{
 
             }
+        },
+        created(){
+            this.getSubstantial();
+            this.getPageList();
         },
         computed:{
             ...mapState({
@@ -248,14 +250,22 @@
                 headline:state=>state.recommand.headline
             })
         },
+        methods: {
+            ...mapActions({
+                getSubstantial: "recommand/getSubstantial",
+                getPageList:"recommand/getPageList",
+            })
+        },
         mounted(){
-            new Swiper(this.$refs.navBox)
+           /* new Swiper(this.$refs.navBox)*/
             new Swiper(this.$refs.head)
+            this.$refs.shopWrapper.getMovieMore(false);
+            this.$refs.reBanner
         },
         watch:{
             banner(){
                 this.$nextTick(()=>{
-                    new Swiper(this.$refs.navBox,{
+                    new Swiper(this.$refs.reBanner,{
                         loop: true,
                         autoplay:{
                             disableOnInteraction:false
@@ -277,6 +287,8 @@
         width: 100%;
         flex-direction: column;
         overflow: auto;
+        margin-bottom: 1.88rem;
+        background: #fff;
     }
     /**/
     .nav{

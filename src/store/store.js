@@ -5,6 +5,8 @@ import oldtonew from './oldtonew/index'
 import stores from './stores/index'
 import classify from './classify/index'
 import product from './product/index'
+import headline from './healines/index'
+import repair from './repair/index'
 
 Vue.use(Vuex)
 
@@ -14,6 +16,8 @@ export default new Vuex.Store({
         oldtonew,
         stores,
         classify,
-        product
+        product,
+        headline,
+        repair
     }
 })
